@@ -1,2 +1,3 @@
 *.zip
 .roomodes
+.DS_Store
