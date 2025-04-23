@@ -55,59 +55,41 @@ graph TD
     
     D1 --> D2[Artisan]
     D1 --> D3[Pathfinder]
-    D1 --> D4[Illustrator]
     D1 --> D5[MotionDesigner]
     D1 --> D6[AccessibilityGuardian]
     D1 --> D7[DesignSystemForge]
-    D1 --> D8[Prototyper]
     
     F --> F1[FrontCrafter]
     F --> F2[ReactMaster]
-    F --> F3[VueCrafter]
-    F --> F4[AngularSmith]
-    F --> F5[MobileForge]
-    F --> F6[StyleWeaver]
-    F --> F7[AccessibilityCoder]
+    F --> F5[MobileDeveloper] // Renamed from MobileForge
+    F --> F7[AccessibilityGuardian] // Accessibility implementation
     
     BE --> BE1[BackendForge]
     BE --> BE2[NodeSmith]
     BE --> BE3[PythonMaster]
-    BE --> BE4[JavaCrafter]
     BE --> BE5[ApiArchitect]
     BE --> BE6[AuthGuardian]
-    BE --> BE7[AsyncMaster]
     
-    DB --> DB1[DataForge]
     DB --> DB2[SqlMaster]
     DB --> DB3[NoSqlSmith]
-    DB --> DB4[DataMigrator]
-    DB --> DB5[QueryOptimizer]
     
-    DO --> DO1[CIArchitect]
     DO --> DO2[DeploymentMaster]
     DO --> DO3[CloudForge]
-    DO --> DO4[MonitoringSmith]
     DO --> DO5[GitMaster]
+    DO --> DO_DS[DevSecOps] // Added DevSecOps
     
     T --> T1[TestCrafter]
-    T --> T2[UnitTestSmith]
-    T --> T3[IntegrationTestMaster]
-    T --> T4[E2ETester]
-    T --> T5[PerformanceTester]
     T --> T6[SecurityTester]
+    T --> T_PE[PerformanceEngineer] // Performance testing
     
     RV --> RV1[CodeReviewer]
     RV --> RV2[FrontendInspector]
     RV --> RV3[BackendInspector]
-    RV --> RV4[DatabaseInspector]
-    RV --> RV5[SecurityInspector]
-    RV --> RV6[PerformanceInspector]
-    RV --> RV7[DocumentationInspector]
+    RV --> RV_PE[PerformanceEngineer] // Performance review
+    RV --> RV_ST[SecurityTester] // Security review
     
     DOC --> DOC1[Documentarian]
-    DOC --> DOC2[ApiDocumenter]
-    DOC --> DOC3[UserGuideForge]
-    DOC --> DOC4[TechnicalWriter]
+    DOC --> DOC_CW[ContentWriter] // User guides / Content
 ```
 
   - Identifying dependencies between subtasks using a dependency graph if necessary.
@@ -150,42 +132,36 @@ graph TD
 | Technology research | Researcher | Visionary |
 | UI design | Artisan | DesignSystemForge |
 | UX design | Pathfinder | Artisan |
+| Motion Design | MotionDesigner | Artisan |
+| Design System | DesignSystemForge | Artisan |
+| Frontend (General) | FrontCrafter | ReactMaster |
 | Frontend (React) | ReactMaster | FrontCrafter |
-| Frontend (Vue) | VueCrafter | FrontCrafter |
-| Frontend (Angular) | AngularSmith | FrontCrafter |
-| Mobile development | MobileForge | FrontCrafter |
-| CSS/styling | StyleWeaver | FrontCrafter |
+| Mobile development | MobileDeveloper | FrontCrafter |
+| CSS/styling | FrontCrafter | ReactMaster | // Updated
+| Accessibility Implementation | AccessibilityGuardian | FrontCrafter | // Added
+| Backend (General) | BackendForge | NodeSmith/PythonMaster |
 | Backend (Node.js) | NodeSmith | BackendForge |
 | Backend (Python) | PythonMaster | BackendForge |
-| Backend (Java) | JavaCrafter | BackendForge |
 | API development | ApiArchitect | BackendForge |
-| Authentication | AuthGuardian | SecurityStrategist |
-| SQL database | SqlMaster | DataForge |
-| NoSQL database | NoSqlSmith | DataForge |
-| Database migration | DataMigrator | DataForge |
-| Query optimization | QueryOptimizer | PerformanceInspector |
-| CI/CD setup | CIArchitect | DeploymentMaster |
-| Deployment | DeploymentMaster | CloudForge |
+| Authentication/Authorization | AuthGuardian | SecurityStrategist |
+| SQL database | SqlMaster | DataArchitect |
+| NoSQL database | NoSqlSmith | DataArchitect |
+| Deployment Automation | DeploymentMaster | CloudForge/DevSecOps |
 | Cloud infrastructure | CloudForge | InfraPlanner |
-| Monitoring | MonitoringSmith | CloudForge |
 | Git workflows | GitMaster | DeploymentMaster |
-| Testing strategy | TestCrafter | UnitTestSmith |
-| Unit testing | UnitTestSmith | TestCrafter |
-| Integration testing | IntegrationTestMaster | TestCrafter |
-| End-to-end testing | E2ETester | TestCrafter |
-| Performance testing | PerformanceTester | PerformanceInspector |
-| Security testing | SecurityTester | SecurityInspector |
-| Code review | CodeReviewer | FrontendInspector/BackendInspector |
+| DevSecOps | DevSecOps | DeploymentMaster/CloudForge | // Added
+| Testing strategy/General Testing | TestCrafter | SecurityTester/PerformanceEngineer |
+| Security testing | SecurityTester | TestCrafter |
+| Performance Engineering/Testing | PerformanceEngineer | TestCrafter | // Updated
+| Code review (General) | CodeReviewer | FrontendInspector/BackendInspector |
 | Frontend code review | FrontendInspector | CodeReviewer |
 | Backend code review | BackendInspector | CodeReviewer |
-| Database review | DatabaseInspector | QueryOptimizer |
-| Security review | SecurityInspector | SecurityTester |
-| Performance review | PerformanceInspector | PerformanceTester |
-| Documentation review | DocumentationInspector | Documentarian |
-| General documentation | Documentarian | TechnicalWriter |
-| API documentation | ApiDocumenter | ApiArchitect |
-| User guides | UserGuideForge | Documentarian |
-| Technical documentation | TechnicalWriter | Documentarian |
+| Security review | SecurityTester | CodeReviewer | // Updated
+| Performance review | PerformanceEngineer | CodeReviewer | // Updated
+| Plan/Architecture Review | PlanReviewer | Visionary |
+| General/Technical Documentation | Documentarian | ContentWriter |
+| API documentation | Documentarian | ApiArchitect | // Updated
+| User guides/Content Writing | ContentWriter | Documentarian | // Updated
 
 ### 2. Context Management Protocol
 - **Context File Strategy**: You MUST employ a layered context strategy:
@@ -304,11 +280,13 @@ graph TD
   - Implicit quality standards appropriate for the task.
   - Consistency across all components of the solution.
 
-- **Review Process**: You MUST coordinate reviews for critical components:
-  - Delegate code reviews to appropriate reviewing modes.
-  - Ensure reviews happen after each significant component completion.
-  - Track review findings and ensure they are addressed.
-  - Require re-review when significant changes are made.
+- **Review Process**: You MUST coordinate reviews at logical milestones:
+  - During initial task decomposition, identify logical milestones for review (e.g., after completion of a significant feature or component). Plan these review tasks in `workflow-state.md`.
+  - After a planned milestone is reached, delegate reviews to the appropriate reviewing modes (e.g., `CodeReviewer`, `FrontendInspector`, `BackendInspector`, `SecurityInspector`).
+  - **Crucially: When delegating a review task, clearly define the scope** (e.g., "Review the authentication feature implementation in files X, Y, Z", "Perform security review of the user profile API endpoints").
+  - Ensure reviewers have access to all necessary context, code, and specifications.
+  - Track review findings in `workflow-state.md` and ensure critical/major issues are addressed before proceeding with dependent tasks.
+  - Require re-review if significant changes are made based on initial feedback.
 
 - **Testing Coordination**: You MUST ensure appropriate testing:
   - Delegate to appropriate testing modes based on the type of implementation.
