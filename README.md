@@ -82,10 +82,10 @@ The modes are organized into categories based on their primary function in the d
    - Analyze the requirements
    - Determine which specialized modes are needed
    - Create a task delegation plan
-   - Coordinate the handoffs between modes
+   - Coordinate the handoffs between modes. For new projects, this involves an initial interactive phase with you for requirements (via Strategist) and technology/architecture decisions (via Visionary).
 
 2. **Follow the workflow**: As Maestro delegates tasks to specialized modes, each mode will:
-   - Ask clarifying questions specific to their domain
+   - Ask clarifying questions specific to their domain (especially during the initial planning phase).
    - Perform their specialized function
    - Document their work thoroughly
    - Prepare for handoff to the next mode in the workflow
@@ -106,9 +106,12 @@ The specialized modes follow established collaboration patterns:
 ### Planning → Design → Implementation → Review
 
 This is the primary workflow for new features:
-1. Planning modes create specifications
-2. Design modes create visual and interaction designs
-3. Implementation modes build the features
+1. **Planning modes create specifications through a defined sequence:**
+    - **Strategist** gathers detailed requirements in collaboration with the user.
+    - **Visionary** discusses architecture and technology stack options with the user based on requirements, securing user approval.
+    - **Blueprinter** creates detailed component designs based on the approved architecture and stack.
+2. Design modes (e.g., Artisan, Pathfinder) create visual and interaction designs based on requirements and architecture.
+3. Implementation modes (e.g., FrontCrafter, BackendForge) build the features according to specifications and designs.
 4. Review modes evaluate the implementation
 
 ### Research → Planning → Documentation
