@@ -81,6 +81,17 @@ The modes are organized into categories based on their primary function in the d
 
 ## How to Use
 
+### Interaction Mode Selection
+
+When starting a new task, Maestro will ask you to select an **Interaction Mode**:
+
+- **`Follow MVP`**: Modes will ask clarifying questions and collaborate on decisions. Focus is on core functionality for a Minimum Viable Product.
+- **`Follow Production`**: Modes will ask clarifying questions and collaborate on decisions. Focus is on robust, scalable, production-ready features.
+- **`YOLO MVP`**: Modes will **NOT** ask clarifying questions; they will make autonomous decisions based on best practices for an MVP scope. Use this if you trust the modes to make reasonable assumptions for a basic version.
+- **`YOLO Production`**: Modes will **NOT** ask clarifying questions; they will make autonomous decisions based on best practices for a production-ready scope. Use this if you trust the modes to make robust, scalable choices autonomously.
+
+This selection influences whether planning, design, and implementation modes ask for input or proceed based on their expertise and the defined scope (MVP/Production). Review, Testing, and Documentation modes will also consider this context.
+
 ### Task Delegation
 
 1. **Start with Maestro**: Begin by describing your task to the Maestro mode, which will:
