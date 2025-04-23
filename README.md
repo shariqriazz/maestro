@@ -12,6 +12,11 @@ This repository contains a collection of highly specialized Roo modes designed t
 
 The modes are organized into categories based on their primary function in the development process. The Maestro mode serves as the central coordinator, directing tasks to the appropriate specialized modes.
 
+## Prerequisites
+
+- **Maestro Mode Repository:** The source code for these modes can be found at: [https://github.com/shariqriazz/maestro](https://github.com/shariqriazz/maestro)
+- **Vertex AI MCP Server:** Some modes, particularly `Researcher`, rely on capabilities provided by an external MCP server. The recommended server is: [https://github.com/shariqriazz/vertex-ai-mcp-server](https://github.com/shariqriazz/vertex-ai-mcp-server). Ensure this server is running and configured for full functionality.
+
 ## Mode Structure
 
 ### Coordination
@@ -87,8 +92,9 @@ The modes are organized into categories based on their primary function in the d
 2. **Follow the workflow**: As Maestro delegates tasks to specialized modes, each mode will:
    - Ask clarifying questions specific to their domain (especially during the initial planning phase).
    - Perform their specialized function
-   - Document their work thoroughly
-   - Prepare for handoff to the next mode in the workflow
+   - Run pre-completion quality checks (linting, formatting, build, runtime errors) if applicable.
+   - Document their work thoroughly (saving artifacts to the `/docs` directory).
+   - Prepare for handoff to the next mode in the workflow (including committing work via GitMaster at milestones).
 
 ### Direct Mode Access
 
@@ -111,8 +117,10 @@ This is the primary workflow for new features:
     - **Visionary** discusses architecture and technology stack options with the user based on requirements, securing user approval.
     - **Blueprinter** creates detailed component designs based on the approved architecture and stack.
 2. Design modes (e.g., Artisan, Pathfinder) create visual and interaction designs based on requirements and architecture.
-3. Implementation modes (e.g., FrontCrafter, BackendForge) build the features according to specifications and designs.
-4. Review modes evaluate the implementation
+3. **GitMaster** initializes the repository.
+4. Implementation modes (e.g., FrontCrafter, BackendForge) build the features according to specifications and designs, running quality checks before completion.
+5. Review modes evaluate the implementation at planned milestones.
+6. **GitMaster** commits successfully reviewed and tested code at milestones.
 
 ### Research → Planning → Documentation
 
@@ -136,7 +144,11 @@ This workflow focuses on quality and performance:
 3. **Follow the workflow**: Complete each stage properly before moving to the next
 4. **Use appropriate modes**: Select the most specialized mode for each task
 5. **Document decisions**: Ensure design decisions and rationales are documented
-6. **Review transitions**: Verify handoffs between modes are complete and accurate
+6. **Review transitions**: Verify handoffs between modes are complete and accurate.
+7. **Use `/docs` Directory**: All generated documentation, plans, and reports should be saved within the `/docs` directory structure.
+8. **Perform Quality Checks**: Implementation modes must run linters, formatters, build checks, and basic runtime checks before completing tasks. Inspector modes verify these checks.
+9. **Follow Command Rules**: Modes executing commands must use non-interactive flags and avoid long-running processes like dev servers.
+10. **Commit Milestones**: Ensure significant, reviewed milestones are committed to version control via GitMaster.
 
 ## Mode Details
 

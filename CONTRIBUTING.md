@@ -53,9 +53,9 @@ When adding a new mode, follow these steps:
 1. **Identify the Need**: Determine if there's a genuine need for a new specialized mode that isn't covered by existing modes
 2. **Define the Role**: Clearly define the mode's role, expertise, and boundaries
 3. **Create the Mode File**: Create a new markdown file named `ModeName-mode.md` following the standard structure
-4. **Define Critical Rules**: Specify the critical rules the mode must follow
-5. **Define Protocols**: Create detailed protocols for the mode's specific domain
-6. **Define Collaboration Points**: Specify how the mode interacts with other modes
+4. **Define Critical Rules**: Specify the critical rules the mode must follow. **Consider including standard rules** where applicable (see Template below).
+5. **Define Protocols**: Create detailed protocols for the mode's specific domain.
+6. **Define Collaboration Points**: Specify how the mode interacts with other modes.
 7. **Update Maestro**: Add the new mode to Maestro's mode selection table and task classification diagram
 8. **Update README**: Add the new mode to the README.md file in the appropriate category
 9. **Regenerate Configuration**: Run the generate-modes.js script to update the .roomodes configuration
@@ -81,7 +81,11 @@ You are Roo, an elite [domain] specialist with exceptional expertise in [specifi
 
 5. **YOU MUST ALWAYS ASK CLARIFYING QUESTIONS**. When requirements are ambiguous, you MUST use `ask_followup_question` to gather necessary information before proceeding. This is NON-NEGOTIABLE.
 
-6. **YOU MUST ALWAYS SAVE [OUTPUTS] TO APPROPRIATE FILES**. You MUST ALWAYS use `write_to_file` to save your [outputs] to appropriate files, not just respond with the content. This is NON-NEGOTIABLE.
+6. **YOU MUST ALWAYS SAVE [OUTPUTS] TO APPROPRIATE FILES**. You MUST ALWAYS use `write_to_file` to save your [outputs] to appropriate markdown files **within the relevant `/docs/...` subdirectory** (e.g., `/docs/planning/`, `/docs/reviews/`, `/docs/research/`), not just respond with the content. This is NON-NEGOTIABLE.
+
+7. **(If applicable) YOU MUST EXECUTE COMMANDS NON-INTERACTIVELY**. When using `execute_command`, ensure commands run without interactive prompts, using appropriate flags (e.g., `-y`, `--yes`, `--non-interactive`, `terraform -auto-approve`) or pre-configuration. This is NON-NEGOTIABLE.
+
+8. **(If applicable - Coding Modes) YOU MUST NOT EXECUTE LONG-RUNNING COMMANDS**. Do not use `execute_command` for non-terminating processes like dev servers. Suggest manual execution instead. This is NON-NEGOTIABLE.
 
 ### 1. [First Protocol Name]
 - **[Section Name]**: You MUST:
@@ -95,7 +99,14 @@ You are Roo, an elite [domain] specialist with exceptional expertise in [specifi
 
 [Additional protocols...]
 
-YOU MUST REMEMBER that your primary purpose is to [primary purpose]. You are NOT a general implementation agent - you are a [domain] specialist. For implementation details beyond [domain], you MUST direct users to appropriate [related] modes. YOU MUST ALWAYS save your [outputs] to appropriate files using `write_to_file`. YOU MUST ALWAYS ask clarifying questions using `ask_followup_question` when requirements are ambiguous.
+**X. (If applicable - Coding Modes) Pre-Completion Quality Checks**
+- **Mandatory Checks**: Before reporting task completion to Maestro, you MUST:
+  - Run linters and formatters (e.g., ESLint, Prettier, Flake8, Black) and fix errors.
+  - Run build/compile/type checks (e.g., `npm run build`, `tsc`, `mypy`) and fix errors.
+  - Check for critical runtime errors (e.g., browser console errors, hydration issues) if feasible.
+  - **Only report completion once all checks pass.**
+
+YOU MUST REMEMBER that your primary purpose is to [primary purpose]. You are NOT a general implementation agent - you are a [domain] specialist. For implementation details beyond [domain], you MUST direct users to appropriate [related] modes. YOU MUST ALWAYS save your [outputs] to appropriate files **in the `/docs` directory** using `write_to_file`. **Ensure code quality checks pass before completion.** YOU MUST ALWAYS ask clarifying questions using `ask_followup_question` when requirements are ambiguous.
 ```
 
 ## Editing an Existing Mode
@@ -114,9 +125,9 @@ When editing an existing mode, follow these steps:
 ### Key Considerations When Editing
 
 1. **Role Boundaries**: Don't expand a mode's responsibilities to overlap with other modes
-2. **Critical Rules**: Maintain the critical rules that ensure proper system functioning
-3. **Protocols**: Keep protocols detailed and specific to the mode's domain
-4. **Collaboration Points**: Ensure collaboration points with other modes remain clear
+2. **Critical Rules**: Maintain the critical rules that ensure proper system functioning. **Ensure standard rules (non-interactive commands, non-blocking commands, pre-completion checks, saving to `/docs`) are included or updated if applicable.**
+3. **Protocols**: Keep protocols detailed and specific to the mode's domain. **Ensure pre-completion checks are included for coding modes.**
+4. **Collaboration Points**: Ensure collaboration points with other modes remain clear.
 5. **Consistency**: Maintain consistent formatting and structure
 
 ## Removing a Mode
@@ -177,7 +188,8 @@ After making changes to any mode files, you must regenerate the .roomodes config
 4. **Complete Documentation**: Document all changes thoroughly
 5. **System Thinking**: Consider the impact of changes on the entire system
 6. **Test Workflows**: Test common workflows after making changes
-7. **Version Control**: Use version control to track changes to mode files
+7. **Version Control**: Use version control to track changes to mode files.
+8. **Standard Rules**: Ensure new or edited modes incorporate standard critical rules regarding non-interactive commands, non-blocking commands, pre-completion checks, and saving outputs to the `/docs` directory where applicable.
 
 ## Common Pitfalls to Avoid
 
@@ -187,6 +199,7 @@ After making changes to any mode files, you must regenerate the .roomodes config
 4. **Inconsistent Formatting**: Using different structures for different modes
 5. **Incomplete Updates**: Updating a mode but forgetting to update related documentation
 6. **Breaking Workflows**: Making changes that break existing workflows
-7. **Ignoring Context Management**: Forgetting to update context management requirements
+7. **Ignoring Context Management**: Forgetting to update context management requirements.
+8. **Forgetting Standard Rules**: Neglecting to include necessary critical rules for command execution, pre-completion checks, or documentation output location.
 
 By following these guidelines, you can maintain a cohesive, effective system of specialized modes that work together seamlessly.

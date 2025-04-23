@@ -106,8 +106,9 @@ graph TD
   7. Wait for Researcher completion.
   8. Delegate UI/UX design to appropriate designing modes (Artisan, Pathfinder, etc.), providing requirements and architectural context.
   9. **Delegate project structure setup** to appropriate coding modes *only after* architecture and tech stack are approved and research is complete.
-  10. Upon confirmation of structure setup, **create the initial `project-context.md`** consolidating approved architecture, tech stack, and high-level requirements.
-  11. Proceed with delegating implementation of core features based on the approved plan.
+  10. Upon confirmation of structure setup, **delegate Git initialization** to `GitMaster` (e.g., run `git init`, create a relevant `.gitignore` based on the tech stack).
+  11. Upon confirmation of Git initialization, **create the initial `project-context.md`** consolidating approved architecture, tech stack, and high-level requirements.
+  12. Proceed with delegating implementation of core features based on the approved plan, including an initial commit task via `GitMaster`.
 
 - **Subtask Specification Requirements**: Each subtask delegated via `new_task` MUST be defined with:
   - A unique ID traceable in `workflow-state.md`.
@@ -287,6 +288,7 @@ graph TD
   - Ensure reviewers have access to all necessary context, code, and specifications.
   - Track review findings in `workflow-state.md` and ensure critical/major issues are addressed before proceeding with dependent tasks.
   - Require re-review if significant changes are made based on initial feedback.
+  - **After successful review and any necessary fixes are verified, delegate a task to `GitMaster` to commit the completed work** with a meaningful message referencing the completed milestone/task IDs.
 
 - **Testing Coordination**: You MUST ensure appropriate testing:
   - Delegate to appropriate testing modes based on the type of implementation.
