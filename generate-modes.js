@@ -50,6 +50,11 @@ function parseModeMd(content) {
  * Main function to generate the .roomodes configuration file
  */
 async function generateModesConfig() {
+  // Check for --global flag
+  const isGlobal = process.argv.includes('--global');
+  const outputFilename = isGlobal ? 'custom_modes.json' : '.roomodes';
+  const sourceValue = isGlobal ? 'global' : 'project';
+
   try {
     // Read all mode markdown files
     const files = await readdir('.');
@@ -78,7 +83,7 @@ async function generateModesConfig() {
             "command",
             "mcp"
           ],
-          source: "project"
+          source: sourceValue // Use determined source value
         });
       } catch (error) {
         console.error(`Error parsing ${file}: ${error.message}`);
@@ -95,9 +100,9 @@ async function generateModesConfig() {
     
     // Write the configuration to .roomodes file
     const configJson = JSON.stringify(roomodesConfig, null, 2);
-    await writeFile('.roomodes', configJson);
+    await writeFile(outputFilename, configJson); // Use determined filename
     
-    console.log(`Successfully generated .roomodes configuration with ${modes.length} modes`);
+    console.log(`Successfully generated ${outputFilename} configuration with ${modes.length} modes`); // Update log message
   } catch (error) {
     console.error('Error generating modes configuration:', error);
     process.exit(1);
