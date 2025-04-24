@@ -79,6 +79,9 @@ The modes are organized into categories based on their primary function in the d
 - **Documentarian**: Technical documentation specialist focusing on developer documentation
 - **ContentWriter**: User-facing content and documentation creator
 
+### System Improvement
+- **SelfReflection**: Meta-cognitive analyst that synthesizes reflection logs to update mode instructions for continuous improvement (Triggered by Maestro post-project).
+
 ## How to Use
 
 ### Interaction Mode Selection
@@ -160,6 +163,7 @@ This workflow focuses on quality and performance:
 8. **Perform Quality Checks**: Implementation modes must run linters, formatters, build checks, and basic runtime checks before completing tasks. Inspector modes verify these checks.
 9. **Follow Command Rules**: Modes executing commands must use non-interactive flags and avoid long-running processes like dev servers.
 10. **Commit Milestones**: Ensure significant, reviewed milestones are committed to version control via GitMaster.
+11. **Log Reflections**: Modes should log significant issues or learnings to `/docs/reflections/ModeName-reflection.md` using `append_to_file` for later analysis by SelfReflection mode.
 
 ## Mode Details
 

@@ -91,6 +91,8 @@ You are Roo, an elite [domain] specialist with exceptional expertise in [specifi
 
 9. **(If applicable - Coding Modes) YOU MUST NOT EXECUTE LONG-RUNNING COMMANDS**. Do not use `execute_command` for non-terminating processes like dev servers. Suggest manual execution instead. This is NON-NEGOTIABLE.
 
+10. **YOU MUST LOG REFLECTIONS ON SIGNIFICANT ISSUES/LEARNINGS**. If you encounter a significant problem, unexpected behavior, a useful workaround, or a key learning during your task, you MUST use `append_to_file` to log a concise reflection to `/docs/reflections/YourModeName-reflection.md`. Include context (task ID if available), the issue/learning, and any resolution or suggestion. This is NON-NEGOTIABLE.
+
 ### 1. [First Protocol Name]
 - **[Section Name]**: You MUST:
   - [Specific instruction]
@@ -110,7 +112,20 @@ You are Roo, an elite [domain] specialist with exceptional expertise in [specifi
   - Check for critical runtime errors (e.g., browser console errors, hydration issues) if feasible.
   - **Only report completion once all checks pass.**
 
-YOU MUST REMEMBER that your primary purpose is to [primary purpose]. Your interaction level depends on the `Interaction Mode`. If `Follow MVP` or `Follow Production`, you MUST ask clarifying questions when specifications are ambiguous. If `YOLO MVP` or `YOLO Production`, you MUST make autonomous decisions based on best practices for the scope. You are NOT a general implementation agent - you are a [domain] specialist. For implementation details beyond [domain], you MUST direct users to appropriate [related] modes. YOU MUST ALWAYS save your [outputs] to appropriate files using `write_to_file`. **Ensure code quality checks pass before completion.** **Adhere strictly to the Interaction Mode rules regarding user questions.**
+**Y. Reflection Logging Protocol**
+- **Trigger**: When encountering a significant issue (e.g., unexpected error, tool failure, major workaround needed), a valuable learning (e.g., discovering a better pattern, identifying an outdated assumption), or resolving a complex problem.
+- **Action**: You MUST use `append_to_file` to add a reflection entry.
+- **File Path**: `/docs/reflections/YourModeName-reflection.md` (Replace `YourModeName` with the actual mode name).
+- **Content Format**: Use Markdown list format. Include:
+  - Timestamp (approximate).
+  - Task ID (if provided by Maestro).
+  - Brief description of the issue/learning.
+  - Context (e.g., tool used, file being processed).
+  - Resolution applied (if any) or suggestion for future prevention.
+  - Example: `- [Timestamp] Task [ID]: Encountered 'ModuleNotFoundError' for 'xyz' library when running Python script. Resolved by adding 'xyz' to requirements.txt and running pip install. Suggestion: Researcher should verify dependencies for the chosen stack.`
+- **Frequency**: Log significant events, not every minor detail. Aim for quality over quantity.
+
+YOU MUST REMEMBER that your primary purpose is to [primary purpose]. Your interaction level depends on the `Interaction Mode`. If `Follow MVP` or `Follow Production`, you MUST ask clarifying questions when specifications are ambiguous. If `YOLO MVP` or `YOLO Production`, you MUST make autonomous decisions based on best practices for the scope. You are NOT a general implementation agent - you are a [domain] specialist. For implementation details beyond [domain], you MUST direct users to appropriate [related] modes. YOU MUST ALWAYS save your [outputs] to appropriate files using `write_to_file`. **Ensure code quality checks pass before completion.** **Log significant reflections using `append_to_file` to `/docs/reflections/YourModeName-reflection.md`.** **Adhere strictly to the Interaction Mode rules regarding user questions.**
 ```
 
 ## Editing an Existing Mode
@@ -129,7 +144,7 @@ When editing an existing mode, follow these steps:
 ### Key Considerations When Editing
 
 1. **Role Boundaries**: Don't expand a mode's responsibilities to overlap with other modes
-2. **Critical Rules**: Maintain the critical rules that ensure proper system functioning. **Ensure standard rules (Interaction Mode handling, context reading, non-interactive commands, non-blocking commands, pre-completion checks, saving outputs) are included or updated if applicable.**
+2. **Critical Rules**: Maintain the critical rules that ensure proper system functioning. **Ensure standard rules (Interaction Mode handling, context reading, non-interactive commands, non-blocking commands, pre-completion checks, saving outputs, reflection logging) are included or updated if applicable.**
 3. **Protocols**: Keep protocols detailed and specific to the mode's domain. **Ensure pre-completion checks are included for coding modes.**
 4. **Collaboration Points**: Ensure collaboration points with other modes remain clear.
 5. **Consistency**: Maintain consistent formatting and structure
@@ -193,7 +208,7 @@ After making changes to any mode files, you must regenerate the .roomodes config
 5. **System Thinking**: Consider the impact of changes on the entire system
 6. **Test Workflows**: Test common workflows after making changes
 7. **Version Control**: Use version control to track changes to mode files.
-8. **Standard Rules**: Ensure new or edited modes incorporate standard critical rules regarding **Interaction Mode handling**, context reading, non-interactive commands, non-blocking commands, pre-completion checks, and saving outputs where applicable.
+8. **Standard Rules**: Ensure new or edited modes incorporate standard critical rules regarding **Interaction Mode handling**, context reading, non-interactive commands, non-blocking commands, pre-completion checks, saving outputs, and **reflection logging** where applicable.
 
 ## Common Pitfalls to Avoid
 
@@ -204,6 +219,6 @@ After making changes to any mode files, you must regenerate the .roomodes config
 5. **Incomplete Updates**: Updating a mode but forgetting to update related documentation
 6. **Breaking Workflows**: Making changes that break existing workflows
 7. **Ignoring Context Management**: Forgetting to update context management requirements.
-8. **Forgetting Standard Rules**: Neglecting to include necessary critical rules for **Interaction Mode handling**, context reading, command execution, pre-completion checks, or output saving.
+8. **Forgetting Standard Rules**: Neglecting to include necessary critical rules for **Interaction Mode handling**, context reading, command execution, pre-completion checks, output saving, or **reflection logging**.
 
 By following these guidelines, you can maintain a cohesive, effective system of specialized modes that work together seamlessly.
