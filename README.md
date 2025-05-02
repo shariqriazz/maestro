@@ -167,6 +167,71 @@ This workflow focuses on quality and performance:
 12. **Log Reflections**: Modes should log significant issues or learnings to `./docs/reflections/ModeName-reflection.md` using `append_to_file` for later analysis by SelfReflection mode.
 13. **Respect Interaction Mode**: Modes must strictly adhere to the selected Interaction Mode (`YOLO` vs. `Follow`). Modes operating under `Follow` will ask clarifying questions; modes under `YOLO` will proceed autonomously. Modes will refuse contradictory instructions from Maestro regarding this behavior.
 
+14. **Configure Temperatures**: Consider adjusting the temperature setting for each mode based on its function (lower for precision, higher for creativity). See "Suggested Temperature Settings" below.
+
+## Suggested Temperature Settings
+
+Temperature influences the randomness and creativity of the model's responses. Lower values (closer to 0) lead to more deterministic, focused outputs, while higher values (closer to 1) encourage more diversity. For this system prioritizing reliability, lower temperatures are generally recommended.
+
+**Temperature: 0.1**
+*   **Rationale:** Maximum precision and safety for critical operations.
+*   **Modes:**
+    *   `AuthGuardian`
+    *   `DeploymentMaster`
+    *   `DevSecOps`
+    *   `GitMaster`
+    *   `SecurityStrategist`
+    *   `SecurityTester`
+    *   `SelfReflection`
+    *   `SqlMaster`
+    *   `NoSqlSmith`
+    *   `CloudForge`
+
+**Temperature: 0.2**
+*   **Rationale:** High predictability for structured implementation, review, and detailed planning.
+*   **Modes:**
+    *   `AccessibilityGuardian`
+    *   `BackendForge`
+    *   `BackendInspector`
+    *   `Blueprinter`
+    *   `CodeReviewer`
+    *   `DataArchitect`
+    *   `Documentarian`
+    *   `FrontCrafter`
+    *   `FrontendInspector`
+    *   `InfraPlanner`
+    *   `Maestro`
+    *   `MobileDeveloper`
+    *   `NodeSmith`
+    *   `PerformanceEngineer`
+    *   `PlanReviewer`
+    *   `PythonMaster`
+    *   `ReactMaster`
+    *   `TestCrafter`
+    *   `ApiArchitect`
+
+**Temperature: 0.4**
+*   **Rationale:** Slight flexibility for analysis, research, and user-facing content while maintaining accuracy.
+*   **Modes:**
+    *   `ContentWriter`
+    *   `Researcher`
+    *   `Strategist`
+    *   `Visionary`
+
+**Temperature: 0.6**
+*   **Rationale:** Moderate creativity for exploring design options within constraints (UX, Design Systems).
+*   **Modes:**
+    *   `DesignSystemForge`
+    *   `Pathfinder`
+
+**Temperature: 0.8**
+*   **Rationale:** Higher creativity for visual and motion design exploration.
+*   **Modes:**
+    *   `Artisan`
+    *   `MotionDesigner`
+
+*Note: These are starting recommendations. Fine-tune based on observed performance.*
+
 ## Mode Details
 
 Each mode has detailed instructions in its respective markdown file. Review these files to understand the specific capabilities, protocols, and responsibilities of each mode.
