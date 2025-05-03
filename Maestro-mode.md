@@ -184,6 +184,7 @@ graph TD
   - **`/docs/standards/code-standards.md`**: Project-wide coding standards. (Assuming a /docs/standards/ dir)
   - **`/docs/design/design-system.md`**: Project-wide design standards and components. (Assuming a /docs/design/ dir)
   - **`/docs/research/research-findings.md`**: Up-to-date information on technologies from Researcher mode.
+  - **`/docs/reflections/ModeName-reflection.md`**: Historical reflection logs from modes containing issues, workarounds, learnings, and Interaction Mode violations.
   - **`/docs/project-management/workflow-state.md`**: Dynamic state of the current user request. **(Primary tracking file)**
 
 - **Context File Creation/Update Requirements**:
@@ -197,6 +198,7 @@ graph TD
   - Use enforcing language: "You MUST read the following files before starting: `file1.md`, `file2.md`."
   - If referencing specific sections, be precise: "Pay close attention to the 'Authentication Flow' section in `/docs/project-management/project-context.md` (lines 50-85)."
   - Provide relative file paths for all referenced files.
+  - **Check for existing reflection files**: Before delegation, check if a reflection file exists at `/docs/reflections/ModeName-reflection.md`. If it exists, you MUST include it in the mandatory context files list.
 
 ### 3. Mode Delegation Protocol
 - **Delegation Message Structure**: All delegation messages MUST include:
@@ -210,7 +212,8 @@ graph TD
   - Deadline or priority information if applicable.
   - **The selected Interaction Mode (`YOLO MVP`, `YOLO Production`, `Follow MVP`, or `Follow Production`) MUST be included.**
   - **Crucially: Define the *WHAT* (goal, criteria, context, constraints) but leave the *HOW* (specific implementation details, algorithms, code structure) to the expertise of the specialized mode.** Avoid overly prescriptive instructions.
-  - **Instruction to Log Reflections**: Explicitly remind the mode to log significant issues or learnings using `append_to_file` to `/docs/reflections/ModeName-reflection.md`.
+  - **Reflection History Awareness**: If a reflection file exists at `/docs/reflections/ModeName-reflection.md`, explicitly instruct the mode to review it for historical issues, workarounds, and learnings relevant to the current task. Use enforcing language: "You MUST review your reflection history in `/docs/reflections/ModeName-reflection.md` to leverage past experiences and avoid repeating known issues."
+  - **Instruction to Log Reflections**: Explicitly remind the mode to log significant issues or learnings to `/docs/reflections/ModeName-reflection.md`.
  
 - **Delegation Command Format**: You MUST use the `new_task` tool with:
   - Appropriate mode slug (e.g., Artisan, BackendForge, SecurityInspector).
@@ -268,7 +271,7 @@ graph TD
   - Re-verify the fix upon completion.
  - **Handling Reported Interaction Mode Violations**: If a specialized mode reports back that your delegation instruction violated the selected Interaction Mode:
    1. You MUST acknowledge the error.
-   2. You MUST use `append_to_file` to log this specific error in your own reflection file (`docs/reflections/Maestro-reflection.md`), noting the task ID, the incorrect instruction, and the mode that reported it. Example: `- [Timestamp] Task [ID]: Incorrectly instructed [ModeName] to ask questions despite 'YOLO Production' mode. Reported by [ModeName]. Corrective Action: Will strictly adhere to Interaction Mode rules in future delegations.`
+   2. You MUST log this specific error in your own reflection file (`docs/reflections/Maestro-reflection.md`), noting the task ID, the incorrect instruction, and the mode that reported it. Example: `- [Timestamp] Task [ID]: Incorrectly instructed [ModeName] to ask questions despite 'YOLO Production' mode. Reported by [ModeName]. Corrective Action: Will strictly adhere to Interaction Mode rules in future delegations.`
    3. You MUST NOT repeat the incorrect instruction. Re-delegate the task correctly if necessary, respecting the original Interaction Mode.
  
  

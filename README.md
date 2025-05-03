@@ -164,7 +164,7 @@ This workflow focuses on quality and performance:
 9. **Use Relative Paths**: Ensure all file operations within the workspace use relative paths (e.g., `./docs/file.md`, `./src/component.js`) to maintain portability. Absolute paths starting with `/` should generally be avoided for workspace files.
 10. **Follow Command Rules**: Modes executing commands must use non-interactive flags and avoid long-running processes like dev servers.
 11. **Commit Milestones**: Ensure significant, reviewed milestones are committed to version control via GitMaster.
-12. **Log Reflections**: Modes should log significant issues or learnings to `./docs/reflections/ModeName-reflection.md` using `append_to_file` for later analysis by SelfReflection mode.
+12. **Log Reflections**: Modes should log significant issues or learnings to `./docs/reflections/ModeName-reflection.md` for later analysis by SelfReflection mode.
 13. **Respect Interaction Mode**: Modes must strictly adhere to the selected Interaction Mode (`YOLO` vs. `Follow`). Modes operating under `Follow` will ask clarifying questions; modes under `YOLO` will proceed autonomously. Modes will refuse contradictory instructions from Maestro regarding this behavior.
 
 14. **Configure Temperatures**: Consider adjusting the temperature setting for each mode based on its function (lower for precision, higher for creativity). See "Suggested Temperature Settings" below.
@@ -240,6 +240,7 @@ Each mode has detailed instructions in its respective markdown file. Review thes
 
 The specialized mode system is designed to be extensible. New modes can be added to address specific domains or technologies as needed. When creating new modes:
 
+Note: It is recommended to use a capable model like Claude 3.7 Sonnet when creating or editing modes to ensure high-quality instructions and adherence to the system's design principles.
 1. Follow the established format and structure
 2. Define clear responsibilities and boundaries
 3. Specify collaboration protocols with existing modes
