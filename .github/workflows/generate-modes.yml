@@ -39,5 +39,11 @@ jobs:
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
           git add .roomodes
-          git commit -m "Auto-generate .roomodes configuration [skip ci]"
-          git push
+
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit. .roomodes file is already up-to-date."
+          else
+            git commit -m "Auto-generate .roomodes configuration [skip ci]"
+            git push
+          fi

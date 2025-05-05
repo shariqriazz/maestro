@@ -28,3 +28,4 @@ This automation ensures that the `.roomodes` configuration file is always up-to-
 - The commit message includes `[skip ci]` to prevent triggering another workflow run when pushing the generated file
 - The workflow uses a GitHub Action bot identity for the commit
 - If the script fails to generate the `.roomodes` file, the workflow will fail, alerting you to the issue
+- If the `.roomodes` file is already up-to-date (no changes to commit), the workflow will succeed without making a commit
