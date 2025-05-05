@@ -167,3 +167,9 @@ The specialized mode system is designed to be extensible. New modes can be added
 ## Implementation
 
 To implement these specialized modes, use the `generate-modes.js` script which will convert the markdown files into the appropriate `.roomodes` configuration format.
+
+### Automatic Generation
+
+A GitHub Action is configured to automatically run the `generate-modes.js` script whenever changes are pushed to the `master` or `main` branch. This ensures that the `.roomodes` configuration file is always up-to-date with the latest mode definitions.
+
+For more details about the GitHub Actions workflow, see the [GitHub Actions documentation](docs/devops/github-actions.md).
