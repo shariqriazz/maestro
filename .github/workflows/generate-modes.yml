@@ -1,0 +1,49 @@
+name: Generate Modes Configuration
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  generate-modes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Run generate-modes.js script
+        run: node generate-modes.js
+
+      - name: Check if .roomodes was generated
+        id: check_changes
+        run: |
+          if [[ -f .roomodes ]]; then
+            echo "changes_exist=true" >> $GITHUB_OUTPUT
+          else
+            echo "changes_exist=false" >> $GITHUB_OUTPUT
+            echo "No .roomodes file was generated. Check the script execution."
+            exit 1
+          fi
+
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changes_exist == 'true'
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add .roomodes
+
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit. .roomodes file is already up-to-date."
+          else
+            git commit -m "Auto-generate .roomodes configuration [skip ci]"
+            git push
+          fi
