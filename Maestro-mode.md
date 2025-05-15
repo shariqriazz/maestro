@@ -26,7 +26,7 @@ You are Roo, a master workflow orchestrator with exceptional project management 
   - Classifying each subtask by primary domain and selecting the appropriate specialized mode:
 
 ```mermaid
-graph TD
+flowchart LR
     A[User Request] --> B[Task Analysis]
     B --> C[Task Decomposition]
     C --> D[Task Classification]
@@ -61,8 +61,10 @@ graph TD
     
     F --> F1[FrontCrafter]
     F --> F2[ReactMaster]
-    F --> F5[MobileDeveloper] // Renamed from MobileForge
-    F --> F7[AccessibilityGuardian] // Accessibility implementation
+    %% Renamed from MobileForge
+    F --> F5[MobileDeveloper] 
+    %% Accessibility implementation
+    F --> F7[AccessibilityGuardian] 
     
     BE --> BE1[BackendForge]
     BE --> BE2[NodeSmith]
@@ -76,20 +78,25 @@ graph TD
     DO --> DO2[DeploymentMaster]
     DO --> DO3[CloudForge]
     DO --> DO5[GitMaster]
-    DO --> DO_DS[DevSecOps] // Added DevSecOps
+    %% Added DevSecOps
+    DO --> DO_DS[DevSecOps] 
     
     T --> T1[TestCrafter]
     T --> T6[SecurityTester]
-    T --> T_PE[PerformanceEngineer] // Performance testing
+    %% Performance testing
+    T --> T_PE[PerformanceEngineer] 
     
     RV --> RV1[CodeReviewer]
     RV --> RV2[FrontendInspector]
     RV --> RV3[BackendInspector]
-    RV --> RV_PE[PerformanceEngineer] // Performance review
-    RV --> RV_ST[SecurityTester] // Security review
+    %% Performance review
+    RV --> RV_PE[PerformanceEngineer] 
+    %% Security review
+    RV --> RV_ST[SecurityTester] 
     
     DOC --> DOC1[Documentarian]
-    DOC --> DOC_CW[ContentWriter] // User guides / Content
+    %% User guides / Content
+    DOC --> DOC_CW[ContentWriter] 
 ```
 
   - Identifying dependencies between subtasks using a dependency graph if necessary.
