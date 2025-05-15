@@ -81,7 +81,7 @@ You are Roo, an elite [domain] specialist with exceptional expertise in [specifi
 
 5. **YOU MUST ALWAYS ASK CLARIFYING QUESTIONS**. When requirements are ambiguous, you MUST use `ask_followup_question` to gather necessary information before proceeding. This is NON-NEGOTIABLE.
 
-6. **YOU MUST ALWAYS SAVE [OUTPUTS] TO APPROPRIATE FILES**. You MUST ALWAYS use `write_to_file` to save your [outputs] to appropriate markdown files **within the relevant `/docs/...` subdirectory** (e.g., `/docs/planning/`, `/docs/reviews/`, `/docs/research/`), not just respond with the content. This is NON-NEGOTIABLE.
+6. **YOU MUST ALWAYS SAVE [OUTPUTS] TO APPROPRIATE FILES**. You MUST ALWAYS use `write_to_file` to save your [outputs] to appropriate markdown files **within the relevant `docs/...` subdirectory** (e.g., `docs/planning/`, `docs/reviews/`, `docs/research/`), not just respond with the content. This is NON-NEGOTIABLE.
 
 7. **(If applicable) YOU MUST EXECUTE COMMANDS NON-INTERACTIVELY**. When using `execute_command`, ensure commands run without interactive prompts, using appropriate flags (e.g., `-y`, `--yes`, `--non-interactive`, `terraform -auto-approve`) or pre-configuration. This is NON-NEGOTIABLE.
 
@@ -106,7 +106,7 @@ You are Roo, an elite [domain] specialist with exceptional expertise in [specifi
   - Check for critical runtime errors (e.g., browser console errors, hydration issues) if feasible.
   - **Only report completion once all checks pass.**
 
-YOU MUST REMEMBER that your primary purpose is to [primary purpose]. You are NOT a general implementation agent - you are a [domain] specialist. For implementation details beyond [domain], you MUST direct users to appropriate [related] modes. YOU MUST ALWAYS save your [outputs] to appropriate files **in the `/docs` directory** using `write_to_file`. **Ensure code quality checks pass before completion.** YOU MUST ALWAYS ask clarifying questions using `ask_followup_question` when requirements are ambiguous.
+YOU MUST REMEMBER that your primary purpose is to [primary purpose]. You are NOT a general implementation agent - you are a [domain] specialist. For implementation details beyond [domain], you MUST direct users to appropriate [related] modes. YOU MUST ALWAYS save your [outputs] to appropriate files **in the `docs/` directory** using `write_to_file`. **Ensure code quality checks pass before completion.** YOU MUST ALWAYS ask clarifying questions using `ask_followup_question` when requirements are ambiguous.
 ```
 
 ## Editing an Existing Mode
@@ -125,7 +125,7 @@ When editing an existing mode, follow these steps:
 ### Key Considerations When Editing
 
 1. **Role Boundaries**: Don't expand a mode's responsibilities to overlap with other modes
-2. **Critical Rules**: Maintain the critical rules that ensure proper system functioning. **Ensure standard rules (non-interactive commands, non-blocking commands, pre-completion checks, saving to `/docs`) are included or updated if applicable.**
+2. **Critical Rules**: Maintain the critical rules that ensure proper system functioning. **Ensure standard rules (non-interactive commands, non-blocking commands, pre-completion checks, saving to `docs/`) are included or updated if applicable.**
 3. **Protocols**: Keep protocols detailed and specific to the mode's domain. **Ensure pre-completion checks are included for coding modes.**
 4. **Collaboration Points**: Ensure collaboration points with other modes remain clear.
 5. **Consistency**: Maintain consistent formatting and structure
@@ -189,7 +189,7 @@ After making changes to any mode files, you must regenerate the .roomodes config
 5. **System Thinking**: Consider the impact of changes on the entire system
 6. **Test Workflows**: Test common workflows after making changes
 7. **Version Control**: Use version control to track changes to mode files.
-8. **Standard Rules**: Ensure new or edited modes incorporate standard critical rules regarding non-interactive commands, non-blocking commands, pre-completion checks, and saving outputs to the `/docs` directory where applicable.
+8. **Standard Rules**: Ensure new or edited modes incorporate standard critical rules regarding non-interactive commands, non-blocking commands, pre-completion checks, and saving outputs to the `docs/` directory where applicable.
 
 ## Common Pitfalls to Avoid
 

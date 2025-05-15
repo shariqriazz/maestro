@@ -93,7 +93,7 @@ The modes are organized into categories based on their primary function in the d
    - Ask clarifying questions specific to their domain (especially during the initial planning phase).
    - Perform their specialized function
    - Run pre-completion quality checks (linting, formatting, build, runtime errors) if applicable.
-   - Document their work thoroughly (saving artifacts to the `/docs` directory).
+   - Document their work thoroughly (saving artifacts to the `docs/` directory).
    - Prepare for handoff to the next mode in the workflow (including committing work via GitMaster at milestones).
 
 ### Direct Mode Access
@@ -145,7 +145,7 @@ This workflow focuses on quality and performance:
 4. **Use appropriate modes**: Select the most specialized mode for each task
 5. **Document decisions**: Ensure design decisions and rationales are documented
 6. **Review transitions**: Verify handoffs between modes are complete and accurate.
-7. **Use `/docs` Directory**: All generated documentation, plans, and reports should be saved within the `/docs` directory structure.
+7. **Use `docs/` Directory**: All generated documentation, plans, and reports should be saved within the `docs/` directory structure.
 8. **Perform Quality Checks**: Implementation modes must run linters, formatters, build checks, and basic runtime checks before completing tasks. Inspector modes verify these checks.
 9. **Follow Command Rules**: Modes executing commands must use non-interactive flags and avoid long-running processes like dev servers.
 10. **Commit Milestones**: Ensure significant, reviewed milestones are committed to version control via GitMaster.
