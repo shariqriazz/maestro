@@ -1,4 +1,4 @@
-MCP SERVERS
+## MCP SERVERS
 
 The Model Context Protocol (MCP) enables communication with servers that provide additional tools and resources. Types:
 
