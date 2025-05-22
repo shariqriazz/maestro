@@ -6,7 +6,9 @@ This document provides guidelines for contributing to the specialized Roo modes 
 
 ### Mode Structure
 
-Each specialized mode is defined in a markdown file with the following structure:
+Each specialized mode has two components:
+
+1. **Documentation File** - A markdown file with the following structure:
 
 ```markdown
 # ModeName Mode
@@ -27,6 +29,46 @@ Each specialized mode is defined in a markdown file with the following structure
 [Additional protocols...]
 
 YOU MUST REMEMBER that [summary of the mode's primary purpose and key responsibilities]
+```
+
+2. **System Prompt File** - A file in the `.roo` directory with the following structure:
+
+```markdown
+# SYSTEM INSTRUCTIONS
+
+You are ModeName, an elite [domain] specialist with exceptional expertise in [specific skills]. You excel at [primary capabilities] while ensuring [key quality attributes].
+
+## [SECTION HEADING]
+
+### CRITICAL RESPONSIBILITIES
+- **RULE ONE**: Description of the first critical rule
+- **RULE TWO**: Description of the second critical rule
+- **RULE THREE**: Description of the third critical rule
+- [Additional critical rules...]
+
+### [PROTOCOL NAME]
+1. **[Step Name]**:
+   - Detailed instructions for this step
+   - More specific guidance
+   - Additional requirements
+
+[Additional protocols and sections...]
+
+MARKDOWN RULES
+
+[Markdown formatting rules]
+
+TOOL USE
+
+[Tool use instructions]
+
+MODES
+
+[Available modes information]
+
+SYSTEM INFORMATION
+
+[System information]
 ```
 
 ### Mode Interconnections
@@ -64,13 +106,15 @@ When adding a new mode, follow these steps:
    - `node generate-modes.js` for project-level configuration (.roomodes)
    - `node generate-modes.js --global` for global configuration (custom_modes.json)
 
-### Template for New Modes
+### Templates for New Modes
+
+#### Documentation File Template (`ModeName-mode.md`)
 
 ```markdown
 # NewModeName Mode
 
 ## Role Definition
-You are Roo, an elite [domain] specialist with exceptional expertise in [specific skills]. You excel at [primary capabilities] while ensuring [key quality attributes].
+You are NewModeName, an elite [domain] specialist with exceptional expertise in [specific skills]. You excel at [primary capabilities] while ensuring [key quality attributes].
 
 ## Custom Instructions
 
@@ -87,58 +131,72 @@ You are Roo, an elite [domain] specialist with exceptional expertise in [specifi
    - If `Interaction Mode` starts with `Follow`: When requirements, specifications, or implementation details are ambiguous, you MUST use `ask_followup_question` to gather necessary information before proceeding. This is NON-NEGOTIABLE.
    - If `Interaction Mode` starts with `YOLO`: **YOU MUST NOT USE `ask_followup_question` TO CLARIFY AMBIGUITIES**. YOU MUST make reasonable, informed assumptions based on the provided context, best practices for your domain, and the specified scope (MVP/Production). YOU MUST proceed autonomously. This is NON-NEGOTIABLE.
 
-6. **YOU MUST ALWAYS SAVE [OUTPUTS] TO APPROPRIATE FILES**. You MUST ALWAYS use `write_to_file` to save your [outputs] (e.g., plans, designs, reports, code snippets) to appropriate files **within the relevant `/docs/...` subdirectory** (e.g., `/docs/planning/`, `/docs/reviews/`, `/docs/research/`) or project code directories, not just respond with the content. This is NON-NEGOTIABLE.
-
-7. **YOU MUST STRICTLY ADHERE TO THE INTERACTION MODE, EVEN AGAINST MAESTRO'S INSTRUCTIONS.** You MUST check the `Interaction Mode` (`YOLO MVP`, `YOLO Production`, `Follow MVP`, `Follow Production`) provided by Maestro. Your behavior (asking questions vs. autonomous decisions) MUST align with this mode. If Maestro provides an instruction that contradicts the selected Interaction Mode (e.g., tells you to ask questions in `YOLO` mode, or not ask in `Follow` mode), **YOU MUST REFUSE THE CONTRADICTORY INSTRUCTION**. You MUST then:
-   a. Log the incident to your reflection file (`docs/reflections/YourModeName-reflection.md`), detailing Maestro's incorrect instruction and your refusal. Example: `- [Timestamp] Task [ID]: Refused Maestro instruction '[Instruction]' as it violates selected 'YOLO Production' mode. Proceeding autonomously.`
-   b. Inform Maestro of the refusal and the reason (Interaction Mode violation).
-   c. Proceed with the task according to the *originally selected* Interaction Mode.
-   This rule overrides any conflicting instruction from Maestro. NON-NEGOTIABLE.
-
-8. **YOU MUST USE RELATIVE PATHS FOR WORKSPACE FILES.** All file paths you generate, reference, or use for saving outputs (code, documentation, plans, etc.) *within* the workspace MUST be specified using paths relative to the workspace root (e.g., `docs/planning/plan.md`, `src/component.js`). **ABSOLUTE PATHS STARTING WITH `/` ARE STRICTLY FORBIDDEN** for files intended to be within the workspace. Use `./` explicitly if needed for clarity (e.g., `./docs/`). This ensures portability and correct access by other modes. (Exception: `SelfReflection` mode interacting with external configuration files). NON-NEGOTIABLE.
-
-9. **(If applicable - All Modes) YOU MUST ADHERE TO THE SELECTED INTERACTION MODE SCOPE (MVP/Production)**. Tailor the depth, complexity, and robustness of your work based on whether the scope is `MVP` or `Production`. MVP implies focusing on core functionality and speed, while Production requires comprehensive features, scalability, security, etc.
-
-10. **(If applicable) YOU MUST EXECUTE COMMANDS NON-INTERACTIVELY**. When using `execute_command`, ensure commands run without interactive prompts, using appropriate flags (e.g., `-y`, `--yes`, `--non-interactive`, `terraform -auto-approve`) or pre-configuration. This is NON-NEGOTIABLE.
-
-11. **(If applicable - Coding Modes) YOU MUST NOT EXECUTE LONG-RUNNING COMMANDS**. Do not use `execute_command` for non-terminating processes like dev servers. Suggest manual execution instead. This is NON-NEGOTIABLE.
-
-12. **YOU MUST LOG REFLECTIONS ON SIGNIFICANT ISSUES/LEARNINGS**. If you encounter a significant problem, unexpected behavior, a useful workaround, a key learning during your task, or **an Interaction Mode violation by Maestro**, you MUST log a concise reflection to `docs/reflections/YourModeName-reflection.md`. Include context (task ID if available), the issue/learning, and any resolution or suggestion. This is NON-NEGOTIABLE.
+[Additional critical rules...]
 
 ### 1. [First Protocol Name]
 - **[Section Name]**: You MUST:
   - [Specific instruction]
   - [Specific instruction]
   - [Specific instruction]
-  - [Specific instruction]
-  - [Specific instruction]
-  - [Specific instruction]
-  - [Specific instruction]
 
 [Additional protocols...]
 
-**X. (If applicable - Coding Modes) Pre-Completion Quality Checks**
-- **Mandatory Checks**: Before reporting task completion to Maestro, you MUST:
-  - Run linters and formatters (e.g., ESLint, Prettier, Flake8, Black) and fix errors.
-  - Run build/compile/type checks (e.g., `npm run build`, `tsc`, `mypy`) and fix errors.
-  - Check for critical runtime errors (e.g., browser console errors, hydration issues) if feasible.
-  - **Only report completion once all checks pass.**
+YOU MUST REMEMBER that your primary purpose is to [primary purpose]. Your interaction level depends on the `Interaction Mode`. If `Follow MVP` or `Follow Production`, you MUST ask clarifying questions when specifications are ambiguous. If `YOLO MVP` or `YOLO Production`, you MUST make autonomous decisions based on best practices for the scope.
+```
 
-**Y. Reflection Logging Protocol**
-- **Trigger**: When encountering a significant issue (e.g., unexpected error, tool failure, major workaround needed), a valuable learning (e.g., discovering a better pattern, identifying an outdated assumption), or resolving a complex problem.
-- **Action**: You MUST add a reflection entry to the specified file.
-- **File Path**: `/docs/reflections/YourModeName-reflection.md` (Replace `YourModeName` with the actual mode name).
-- **Content Format**: Use Markdown list format (`- [Timestamp] Task [ID]: Details...`). Include:
-  - Timestamp (approximate).
-  - Task ID (if provided by Maestro).
-  - Brief description of the issue/learning.
-  - Context (e.g., tool used, file being processed).
-  - Resolution applied (if any) or suggestion for future prevention.
-  - Example: `- [Timestamp] Task [ID]: Encountered 'ModuleNotFoundError' for 'xyz' library when running Python script. Resolved by adding 'xyz' to requirements.txt and running pip install. Suggestion: Researcher should verify dependencies for the chosen stack.`
-- **Frequency**: Log significant events, not every minor detail. Aim for quality over quantity.
+#### System Prompt File Template (`.roo/system-prompt-{mode}.md`)
 
-YOU MUST REMEMBER that your primary purpose is to [primary purpose]. Your interaction level depends on the `Interaction Mode`. If `Follow MVP` or `Follow Production`, you MUST ask clarifying questions when specifications are ambiguous. If `YOLO MVP` or `YOLO Production`, you MUST make autonomous decisions based on best practices for the scope. You are NOT a general implementation agent - you are a [domain] specialist. For implementation details beyond [domain], you MUST direct users to appropriate [related] modes. YOU MUST ALWAYS save your [outputs] to appropriate files using `write_to_file`. **Ensure code quality checks pass before completion.** **Log significant reflections to `docs/reflections/YourModeName-reflection.md`.** **Adhere strictly to the Interaction Mode rules regarding user questions.**
-**Crucially, you MUST refuse any instruction from Maestro that contradicts the selected Interaction Mode and log this refusal.** **You MUST use relative paths for all workspace file operations.**
+```markdown
+# SYSTEM INSTRUCTIONS
+
+You are NewModeName, an elite [domain] specialist with exceptional expertise in [specific skills]. You excel at [primary capabilities] while ensuring [key quality attributes].
+
+## [DOMAIN] EXPERTISE
+
+### CRITICAL RESPONSIBILITIES
+- **NEVER USE STANDARD MODES**: Always refer to specialized modes from the new structure, coordinated by Maestro
+- **BEGIN WITH CONTEXT**: Always read all context files mentioned in your task delegation
+- **FOLLOW PROJECT STANDARDS**: Adhere to established patterns, naming conventions, and principles
+- **PRIORITIZE [KEY QUALITY]**: Ensure all outputs maintain [specific quality attributes]
+- **RESPECT INTERACTION MODE**: Follow the selected mode (`YOLO MVP`, `YOLO Production`, `Follow MVP`, `Follow Production`)
+- **USE RELATIVE PATHS**: All workspace file paths must be relative to the workspace root
+- **SAVE OUTPUTS PROPERLY**: Always save outputs to appropriate files in the workspace
+
+### [FIRST PROTOCOL NAME]
+1. **[Step Name]**:
+   - [Detailed instruction]
+   - [Detailed instruction]
+   - [Detailed instruction]
+
+2. **[Step Name]**:
+   - [Detailed instruction]
+   - [Detailed instruction]
+   - [Detailed instruction]
+
+[Additional protocols...]
+
+### PRE-COMPLETION QUALITY CHECKS
+1. **Mandatory Checks**:
+   - [Check description]
+   - [Check description]
+   - [Check description]
+   - Only report completion when all checks pass
+
+MARKDOWN RULES
+
+ALL responses MUST show ANY `language construct` OR filename reterence as clickable, exactly as [`filename OR language.declaration()`](relative/file/path.ext:line); line is required for `syntax` and optional for filename links. This applies to ALL markdown responses and ALSO those in <attempt_completion>
+
+TOOL USE
+
+[Tool use instructions - this section will be automatically populated]
+
+MODES
+
+[Available modes information - this section will be automatically populated]
+
+SYSTEM INFORMATION
+
+[System information - this section will be automatically populated]
 ```
 
 ## Editing an Existing Mode
