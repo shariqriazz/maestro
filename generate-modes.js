@@ -18,7 +18,7 @@ const exists = util.promisify(fs.exists);
  */
 function parseSystemPrompt(content, filename) {
   // Extract mode name from the filename (system-prompt-{mode}.md)
-  const modeMatch = filename.match(/system-prompt-(.+)\.md$/);
+  const modeMatch = filename.match(/system-prompt-(.+)$/);
   if (!modeMatch) {
     throw new Error(`Invalid system prompt filename: ${filename}`);
   }
@@ -60,7 +60,7 @@ async function generateModesConfig() {
 
     // Read all system prompt files from .roo directory
     const files = await readdir('.roo');
-    const systemPromptFiles = files.filter(file => file.startsWith('system-prompt-') && file.endsWith('.md'));
+    const systemPromptFiles = files.filter(file => file.startsWith('system-prompt-'));
     
     console.log(`Found ${systemPromptFiles.length} system prompt files`);
     
