@@ -52,13 +52,17 @@ When adding a new mode, follow these steps:
 
 1. **Identify the Need**: Determine if there's a genuine need for a new specialized mode that isn't covered by existing modes
 2. **Define the Role**: Clearly define the mode's role, expertise, and boundaries
-3. **Create the Mode File**: Create a new markdown file named `ModeName-mode.md` following the standard structure
+3. **Create the Mode File**:
+   - Create a new markdown file named `ModeName-mode.md` following the standard structure (for documentation purposes)
+   - Create a system prompt file in the `.roo` directory named `system-prompt-{mode}.md` that starts with "# SYSTEM INSTRUCTIONS" followed by the role definition starting with "You are {ModeName}, ..."
 4. **Define Critical Rules**: Specify the critical rules the mode must follow. **Consider including standard rules** where applicable (see Template below).
 5. **Define Protocols**: Create detailed protocols for the mode's specific domain.
 6. **Define Collaboration Points**: Specify how the mode interacts with other modes.
 7. **Update Maestro**: Add the new mode to Maestro's mode selection table and task classification diagram
 8. **Update README**: Add the new mode to the README.md file in the appropriate category
-9. **Regenerate Configuration**: Run the generate-modes.js script to update the .roomodes configuration
+9. **Regenerate Configuration**: Run the generate-modes.js script to update the .roomodes configuration:
+   - `node generate-modes.js` for project-level configuration (.roomodes)
+   - `node generate-modes.js --global` for global configuration (custom_modes.json)
 
 ### Template for New Modes
 
@@ -144,11 +148,15 @@ When editing an existing mode, follow these steps:
 1. **Understand the Current Role**: Review the mode's current role, responsibilities, and boundaries
 2. **Identify Needed Changes**: Determine what specific changes are needed
 3. **Maintain Consistency**: Ensure changes maintain consistency with the overall system
-4. **Update Mode File**: Edit the mode's markdown file with the changes
+4. **Update Mode Files**:
+   - Edit the mode's markdown file (`ModeName-mode.md`) for documentation purposes
+   - Edit the system prompt file (`.roo/system-prompt-{mode}.md`) to update the actual mode configuration
 5. **Update Related Modes**: If the changes affect interactions with other modes, update those modes as well
 6. **Update Maestro**: If the mode's responsibilities change, update Maestro's mode selection table
 7. **Update README**: Update the README.md file if the mode's description changes
-8. **Regenerate Configuration**: Run the generate-modes.js script to update the .roomodes configuration
+8. **Regenerate Configuration**: Run the generate-modes.js script to update the configuration:
+   - `node generate-modes.js` for project-level configuration (.roomodes)
+   - `node generate-modes.js --global` for global configuration (custom_modes.json)
 
 ### Key Considerations When Editing
 
@@ -167,8 +175,12 @@ When removing a mode, follow these steps:
 3. **Update Dependent Modes**: Update any modes that reference the removed mode
 4. **Update Maestro**: Remove the mode from Maestro's mode selection table and task classification diagram
 5. **Update README**: Remove the mode from the README.md file
-6. **Remove Mode File**: Delete the mode's markdown file
-7. **Regenerate Configuration**: Run the generate-modes.js script to update the .roomodes configuration
+6. **Remove Mode Files**:
+   - Delete the mode's markdown file (`ModeName-mode.md`)
+   - Delete the system prompt file (`.roo/system-prompt-{mode}.md`)
+7. **Regenerate Configuration**: Run the generate-modes.js script to update the configuration:
+   - `node generate-modes.js` for project-level configuration (.roomodes)
+   - `node generate-modes.js --global` for global configuration (custom_modes.json)
 
 ### Critical Considerations When Removing
 
@@ -197,14 +209,18 @@ When making changes to the mode system, all these places must be kept in sync.
 
 ## Updating the Configuration
 
-After making changes to any mode files, you must regenerate the .roomodes configuration:
+After making changes to any mode files, you must regenerate the configuration:
 
 1. Run the generate-modes.js script:
    ```
+   # For project-level configuration (.roomodes)
    node generate-modes.js
+   
+   # For global configuration (custom_modes.json)
+   node generate-modes.js --global
    ```
 
-2. Verify the generated .roomodes file contains all expected modes
+2. Verify the generated configuration file contains all expected modes with proper role definitions
 
 3. Test the updated configuration to ensure all modes work as expected
 

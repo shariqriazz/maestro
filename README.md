@@ -249,4 +249,12 @@ Note: It is recommended to use a capable model like Claude 3.7 Sonnet when creat
 
 ## Implementation
 
-To implement these specialized modes, use the `generate-modes.js` script which will convert the markdown files into the appropriate `.roomodes` configuration format.
+To implement these specialized modes:
+
+1. Create system prompt files for each mode in the `.roo` directory with the naming convention `system-prompt-{mode}.md`
+2. Each system prompt file should follow the standard format with a "# SYSTEM INSTRUCTIONS" heading followed by the role definition starting with "You are {ModeName}, ..."
+3. Run the `generate-modes.js` script to generate the configuration:
+   - `node generate-modes.js` - Creates a `.roomodes` file (project-level configuration)
+   - `node generate-modes.js --global` - Creates a `custom_modes.json` file (global configuration)
+
+The script extracts the role definition from each system prompt file and includes it in the configuration. This approach ensures that all modes have consistent and properly formatted role definitions.

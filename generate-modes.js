@@ -7,42 +7,37 @@ const util = require('util');
 const readdir = util.promisify(fs.readdir);
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
+const mkdir = util.promisify(fs.mkdir);
+const exists = util.promisify(fs.exists);
 
 /**
- * Parses a mode markdown file to extract the mode name, role definition, and custom instructions
- * @param {string} content - The content of the markdown file
- * @returns {Object} An object containing the mode name, slug, role, and instructions
+ * Parses a system prompt file to extract the mode name and role definition
+ * @param {string} content - The content of the system prompt file
+ * @param {string} filename - The filename of the system prompt file
+ * @returns {Object} An object containing the mode name, slug, and role
  */
-function parseModeMd(content) {
-  // Extract mode name from the first heading
-  const nameMatch = content.match(/^# ([^\n]+) Mode/m);
-  if (!nameMatch) {
-    throw new Error('Could not find mode name in markdown file');
+function parseSystemPrompt(content, filename) {
+  // Extract mode name from the filename (system-prompt-{mode}.md)
+  const modeMatch = filename.match(/system-prompt-(.+)\.md$/);
+  if (!modeMatch) {
+    throw new Error(`Invalid system prompt filename: ${filename}`);
   }
-  const name = nameMatch[1];
+  const slug = modeMatch[1];
   
-  // Generate slug from name
-  const slug = name.toLowerCase().replace(/\s+/g, '-');
-  
-  // Extract role definition
-  const roleMatch = content.match(/## Role Definition\s+([^\n]+(?:\n(?!##)[^\n]+)*)/);
+  // Extract the first paragraph after "# SYSTEM INSTRUCTIONS" as the role definition
+  // This pattern matches the first paragraph starting with "You are" after the heading
+  const roleMatch = content.match(/# SYSTEM INSTRUCTIONS\s+\n+You are ([^,\n]+)(?:,\s+|\s+)([^\n]+(?:\n(?!##|\n\n)[^\n]+)*)/);
   if (!roleMatch) {
-    throw new Error('Could not find role definition in markdown file');
+    throw new Error('Could not find role definition in system prompt file');
   }
-  const role = roleMatch[1].trim();
   
-  // Extract custom instructions
-  const instructionsMatch = content.match(/## Custom Instructions\s+([\s\S]+?)(?=\n## |$)/);
-  if (!instructionsMatch) {
-    throw new Error('Could not find custom instructions in markdown file');
-  }
-  const instructions = instructionsMatch[1].trim();
+  const name = roleMatch[1].trim();
+  const role = `You are ${name}, ${roleMatch[2].trim()}`;
   
   return {
     name,
     slug,
-    role,
-    instructions
+    role
   };
 }
 
@@ -56,26 +51,32 @@ async function generateModesConfig() {
   const sourceValue = isGlobal ? 'global' : 'project';
 
   try {
-    // Read all mode markdown files
-    const files = await readdir('.');
-    const modeFiles = files.filter(file => file.endsWith('-mode.md'));
+    // Check if .roo directory exists
+    const rooExists = await exists('.roo');
+    if (!rooExists) {
+      console.log('.roo directory not found, creating it...');
+      await mkdir('.roo', { recursive: true });
+    }
+
+    // Read all system prompt files from .roo directory
+    const files = await readdir('.roo');
+    const systemPromptFiles = files.filter(file => file.startsWith('system-prompt-') && file.endsWith('.md'));
     
-    console.log(`Found ${modeFiles.length} mode files`);
+    console.log(`Found ${systemPromptFiles.length} system prompt files`);
     
-    // Parse each mode file
+    // Parse each system prompt file
     const modes = [];
-    for (const file of modeFiles) {
+    for (const file of systemPromptFiles) {
       console.log(`Processing ${file}...`);
-      const content = await readFile(file, 'utf-8');
+      const content = await readFile(path.join('.roo', file), 'utf-8');
       try {
-        const mode = parseModeMd(content);
+        const mode = parseSystemPrompt(content, file);
         
-        // Add mode to the array
+        // Add mode to the array with only role definition (no custom instructions)
         modes.push({
           slug: mode.slug,
           name: mode.name,
           roleDefinition: mode.role,
-          customInstructions: mode.instructions,
           groups: [
             "read",
             "edit",
